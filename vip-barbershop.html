@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Barbershop Mustafa | Premium Herrefrisør</title>
+<style>
+  /* ============ FARGER & GRUNNSTIL ============ */
+  :root{
+    --gold:        #c9a24b;
+    --gold-light:  #e8c97a;
+    --gold-dark:   #8a6d2a;
+    --black:       #0c0c0e;
+    --dark:        #141417;
+    --dark-2:      #1c1c21;
+    --grey:        #9b9ba3;
+    --white:       #f5f2ea;
+    --border:      rgba(201,162,75,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    background:var(--black);
+    color:var(--white);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:1px;}
+  a{color:var(--gold-light);text-decoration:none;}
+  section{max-width:1100px;margin:0 auto;padding:80px 24px;}
+  .section-title{
+    text-align:center;font-size:2.2rem;color:var(--gold);
+    margin-bottom:10px;
+  }
+  .section-sub{
+    text-align:center;color:var(--grey);margin-bottom:50px;font-style:italic;
+  }
+  .section-sub::before,.section-sub::after{content:"— ";color:var(--gold);}
+  .section-sub::after{content:" —";}
+
+  /* ============ SPRÅK-VEKSLER (kun CSS) ============ */
+  .en{display:none;}
+  #lang-toggle{display:none;}
+  #lang-toggle:checked ~ * .no{display:none;}
+  #lang-toggle:checked ~ * .en{display:block;}
+  #lang-toggle:checked ~ * a.en, #lang-toggle:checked ~ * span.en,
+  #lang-toggle:checked ~ * strong.en{display:inline;}
+  #lang-toggle:checked ~ * .no{display:none;}
+
+  .lang-switch{
+    position:relative;cursor:pointer;
+    border:1px solid var(--gold);color:var(--gold);
+    padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:700;
+    letter-spacing:1px;background:transparent;user-select:none;
+    transition:.3s;
+  }
+  .lang-switch:hover{background:var(--gold);color:var(--black);}
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(12,12,14,.95);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(6px);
+  }
+  .header-inner{
+    max-width:1200px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;gap:16px;flex-wrap:wrap;
+  }
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo .crown{font-size:2rem;color:var(--gold);filter:drop-shadow(0 0 6px rgba(201,162,75,.6));}
+  .logo-text{line-height:1.1;}
+  .logo-text .vip{
+    font-family:Georgia,serif;font-size:1.6rem;font-weight:bold;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    letter-spacing:3px;
+  }
+  .logo-text small{
+    display:block;color:var(--grey);font-size:.65rem;letter-spacing:4px;
+    text-transform:uppercase;
+  }
+  nav ul{display:flex;list-style:none;gap:26px;flex-wrap:wrap;align-items:center;}
+  nav a{
+    color:var(--white);font-size:.9rem;letter-spacing:1px;
+    text-transform:uppercase;position:relative;transition:.3s;
+  }
+  nav a:not(.cta)::after{
+    content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;
+    background:var(--gold);transition:.3s;
+  }
+  nav a:not(.cta):hover{color:var(--gold-light);}
+  nav a:not(.cta):hover::after{width:100%;}
+  .cta{
+    border:1px solid var(--gold);padding:8px 20px;border-radius:4px;
+    color:var(--gold)!important;font-weight:700;
+  }
+  .cta:hover{background:var(--gold);color:var(--black)!important;}
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:88vh;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;padding:60px 24px;
+    background:
+      linear-gradient(rgba(12,12,14,.82),rgba(12,12,14,.95)),
+      repeating-linear-gradient(90deg,#191914 0 60px,#22221b 60px 62px);
+    border-bottom:1px solid var(--border);
+  }
+  .hero .crown-big{
+    font-size:4.5rem;color:var(--gold);
+    filter:drop-shadow(0 0 14px rgba(201,162,75,.7));
+    animation:float 3.5s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero .newstyle{
+    color:var(--grey);font-style:italic;letter-spacing:6px;
+    text-transform:uppercase;font-size:.85rem;margin-top:18px;
+  }
+  .hero h1{
+    font-size:clamp(3.5rem,10vw,7rem);letter-spacing:10px;
+    background:linear-gradient(135deg,#f3e2ac,var(--gold) 45%,var(--gold-dark));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin:8px 0;
+  }
+  .hero h1 .scissors{color:var(--gold);font-size:.5em;vertical-align:middle;-webkit-text-fill-color:var(--gold);}
+  .hero .tagline{
+    color:var(--gold-light);letter-spacing:5px;text-transform:uppercase;
+    font-size:.95rem;margin-bottom:14px;
+  }
+  .hero p.lead{max-width:560px;color:var(--grey);margin:0 auto 34px;}
+  .hero-phone{
+    font-size:1.8rem;font-weight:700;color:var(--gold-light);
+    letter-spacing:3px;margin-bottom:30px;
+  }
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+  .btn{
+    display:inline-block;padding:14px 36px;border-radius:4px;
+    font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.85rem;
+    transition:.3s;
+  }
+  .btn-gold{background:var(--gold);color:var(--black);box-shadow:0 0 22px rgba(201,162,75,.35);}
+  .btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);}
+  .btn-outline{border:1px solid var(--gold);color:var(--gold);}
+  .btn-outline:hover{background:var(--gold);color:var(--black);transform:translateY(-3px);}
+
+  /* ============ TJENESTER / PRISER ============ */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;
+  }
+  .card{
+    background:var(--dark-2);border:1px solid var(--border);border-radius:8px;
+    padding:36px 26px;text-align:center;transition:.3s;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(201,162,75,.15);border-color:var(--gold);}
+  .card .icon{font-size:2.6rem;margin-bottom:14px;}
+  .card h3{color:var(--gold);margin-bottom:10px;font-size:1.2rem;}
+  .card p{color:var(--grey);font-size:.9rem;margin-bottom:16px;}
+  .price{
+    display:inline-block;font-family:Georgia,serif;font-size:1.5rem;
+    color:var(--gold-light);border-top:1px solid var(--border);
+    padding-top:12px;width:80%;
+  }
+
+  /* ============ OM OSS ============ */
+  .about{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .about-flex{display:flex;gap:50px;align-items:center;flex-wrap:wrap;}
+  .about-flex>div{flex:1;min-width:280px;}
+  .about-visual{
+    background:
+      linear-gradient(rgba(12,12,14,.55),rgba(12,12,14,.55)),
+      repeating-linear-gradient(90deg,#23231c 0 48px,#2c2c22 48px 50px);
+    border:1px solid var(--border);border-radius:8px;
+    min-height:320px;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;gap:12px;
+  }
+  .about-visual .crown{font-size:4rem;color:var(--gold);}
+  .about-visual .welcome{
+    font-family:Georgia,serif;font-size:1.4rem;
+    letter-spacing:14px;color:var(--gold-light);text-transform:uppercase;
+  }
+  .about h2{color:var(--gold);font-size:1.9rem;margin-bottom:18px;}
+  .about p{color:var(--grey);margin-bottom:14px;}
+  .badges{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;}
+  .badge{
+    border:1px solid var(--gold);color:var(--gold);border-radius:50%;
+    width:58px;height:58px;display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-weight:bold;font-size:.85rem;letter-spacing:1px;
+  }
+
+  /* ============ ÅPNINGSTIDER ============ */
+  .hours-box{
+    max-width:480px;margin:0 auto;background:var(--dark-2);
+    border:1px solid var(--border);border-radius:8px;padding:40px;
+  }
+  .hours-box table{width:100%;border-collapse:collapse;}
+  .hours-box td{padding:12px 4px;border-bottom:1px dashed rgba(201,162,75,.25);color:var(--grey);}
+  .hours-box td:last-child{text-align:right;color:var(--gold-light);font-weight:600;}
+  .open-now{color:var(--gold);text-align:center;margin-top:18px;font-style:italic;}
+
+  /* ============ KONTAKT / FOOTER ============ */
+  footer{
+    background:var(--dark);border-top:1px solid var(--border);
+    text-align:center;padding:60px 24px 30px;
+  }
+  footer .crown{font-size:2.6rem;color:var(--gold);}
+  footer .vip-footer{
+    font-family:Georgia,serif;font-size:2rem;letter-spacing:6px;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  footer .tag{color:var(--grey);letter-spacing:4px;font-size:.8rem;text-transform:uppercase;margin-bottom:26px;}
+  .footer-contact{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:34px;}
+  .footer-contact a{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--border);padding:12px 26px;border-radius:4px;
+    color:var(--white);transition:.3s;font-weight:600;
+  }
+  .footer-contact a:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-3px);}
+  footer .copy{color:var(--grey);font-size:.8rem;border-top:1px solid rgba(201,162,75,.2);padding-top:22px;max-width:700px;margin:0 auto;}
+
+  /* ============ RESPONSIV ============ */
+  @media(max-width:760px){
+    .header-inner{justify-content:center;}
+    nav ul{justify-content:center;gap:16px;}
+    .hero h1{letter-spacing:5px;}
+    section{padding:60px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Skjult avkrysningsboks styrer språket (kun CSS) -->
+<input type="checkbox" id="lang-toggle">
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="crown">👑</span>
+      <div class="logo-text">
+        <span class="vip">VIP</span>
+        <small>Barbershop Mustafa</small>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#hjem" class="no">Hjem</a><a href="#hjem" class="en">Home</a></li>
+        <li><a href="#tjenester" class="no">Tjenester</a><a href="#tjenester" class="en">Services</a></li>
+        <li><a href="#om-oss" class="no">Om oss</a><a href="#om-oss" class="en">About us</a></li>
+        <li><a href="#apningstider" class="no">Åpningstider</a><a href="#apningstider" class="en">Opening hours</a></li>
+        <li><a href="#kontakt" class="no cta">Bestill time</a><a href="#kontakt" class="en cta">Book now</a></li>
+        <li>
+          <label for="lang-toggle" class="lang-switch">
+            <span class="no">🇬🇧 English</span>
+            <span class="en">🇳🇴 Norsk</span>
+          </label>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hjem">
+    <div class="crown-big">👑</div>
+    <div class="newstyle">
+      <span class="no">— New Style —</span>
+      <span class="en">— New Style —</span>
+    </div>
+    <h1><span class="scissors">✂️</span>VIP<span class="scissors">✂️</span></h1>
+    <div class="tagline">
+      <span class="no">Barber Shop · Velkommen</span>
+      <span class="en">Barber Shop · Welcome</span>
+    </div>
+    <p class="lead">
+      <span class="no">Opplev førsteklasses herreklipp, skjeggtrim og barbering i en ekte VIP-atmosfære. Vi gir deg den stilen du fortjener — hver eneste gang.</span>
+      <span class="en">Experience first-class men's haircuts, beard trims and shaving in a true VIP atmosphere. We give you the style you deserve — every single time.</span>
+    </p>
+    <div class="hero-phone">📞 40 99 92 04</div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="tel:+4740999204">
+        <span class="no">Ring og bestill</span><span class="en">Call &amp; book</span>
+      </a>
+      <a class="btn btn-outline" href="https://maps.app.goo.gl/yPQmi85fP8rdjN8A8?g_st=ac" target="_blank" rel="noopener">
+        <span class="no">📍 Finn oss</span><span class="en">📍 Find us</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- TJENESTER -->
+  <section id="tjenester">
+    <h2 class="section-title">
+      <span class="no">Våre tjenester</span><span class="en">Our services</span>
+    </h2>
+    <p class="section-sub">
+      <span class="no">Priser i VIP-klasse</span><span class="en">VIP-class prices</span>
+    </p>
+    <div class="services-grid">
+      <div class="card">
+        <div class="icon">💈</div>
+        <h3><span class="no">Herreklipp</span><span class="en">Men's haircut</span></h3>
+        <p><span class="no">Klassisk eller moderne klipp, tilpasset din stil og ansiktsform.</span>
+           <span class="en">Classic or modern cut, tailored to your style and face shape.</span></p>
+        <div class="price"><span class="no">fra 300 kr</span><span class="en">from 300 kr</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">🪒</div>
+        <h3><span class="no">Skjegg &amp; Barbering</span><span class="en">Beard &amp; Shave</span></h3>
+        <p><span class="no">Presis skjeggtrim, kantklipp og tradisjonell våtbarbering.</span>
+           <span class="en">Precision beard trim, edge-up and traditional hot towel shave.</span></p>
+        <div class="price"><span class="no">fra 200 kr</span><span class="en">from 200 kr</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">✂️</div>
+        <h3><span class="no">Klipp + Skjegg</span><span class="en">Cut + Beard</span></h3>
+        <p><span class="no">Komplett VIP-pakke med klipp, skjegg og styling.</span>
+           <span class="en">Complete VIP package with cut, beard and styling.</span></p>
+        <div class="price"><span class="no">fra 450 kr</span><span class="en">from 450 kr</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">👦</div>
+        <h3><span class="no">Barneklipp</span><span class="en">Kids' haircut</span></h3>
+        <p><span class="no">Barnevennlig klipp for de minste — med tålmodighet og smil.</span>
+           <span class="en">Kid-friendly cuts for the little ones — with patience and a smile.</span></p>
+        <div class="price"><span class="no">fra 250 kr</span><span class="en">from 250 kr</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OM OSS -->
+  <section class="about" id="om-oss">
+    <div class="about-flex">
+      <div class="about-visual">
+        <span class="crown">👑</span>
+        <span class="welcome">welcome</span>
+      </div>
+      <div>
+        <h2><span class="no">Velkommen til VIP Barbershop Mustafa</span><span class="en">Welcome to VIP Barbershop Mustafa</span></h2>
+        <p>
+          <span class="no">Hos oss er hver kunde en VIP. Med lang erfaring, presise teknikker og lidenskap for faget, leverer vi alltid et resultat du kan være stolt av.</span>
+          <span class="en">With us, every customer is a VIP. With long experience, precise techniques and passion for the craft, we always deliver a result you can be proud of.</span>
+        </p>
+        <p>
+          <span class="no">Slå deg ned i stolen, nyt atmosfæren og la oss ta deg imot — du fortjener det beste.</span>
+          <span class="en">Take a seat in the chair, enjoy the atmosphere and let us take care of you — you deserve the best.</span>
+        </p>
+        <div class="badges">
+          <div class="badge">VIP</div>
+          <div class="badge">★★★</div>
+          <div class="badge">✂</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÅPNINGSTIDER -->
+  <section id="apningstider">
+    <h2 class="section-title">
+      <span class="no">Åpningstider</span><span class="en">Opening hours</span>
+    </h2>
+    <p class="section-sub">
+      <span class="no">Vi gleder oss til å se deg</span><span class="en">We look forward to seeing you</span>
+    </p>
+    <div class="hours-box">
+      <table>
+        <tr><td><span class="no">Mandag – Fredag</span><span class="en">Monday – Friday</span></td><td>09:00 – 19:00</td></tr>
+        <tr><td><span class="no">Lørdag</span><span class="en">Saturday</span></td><td>10:00 – 18:00</td></tr>
+        <tr><td><span class="no">Søndag</span><span class="en">Sunday</span></td><td><span class="no">Etter avtale</span><span class="en">By appointment</span></td></tr>
+      </table>
+      <p class="open-now">
+        <span class="no">🚪 Drop-in eller ring 40 99 92 04</span>
+        <span class="en">🚪 Walk-ins or call 40 99 92 04</span>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="kontakt">
+  <div class="crown">👑</div>
+  <div class="vip-footer">VIP</div>
+  <div class="tag"><span class="no">Barber Shop Mustafa</span><span class="en">Barber Shop Mustafa</span></div>
+
+  <div class="footer-contact">
+    <a href="tel:+4740999204">📞 +47 40 99 92 04</a>
+    <a href="https://maps.app.goo.gl/yPQmi85fP8rdjN8A8?g_st=ac" target="_blank" rel="noopener">📍 <span class="no">Besøk oss på Google Maps</span><span class="en">Visit us on Google Maps</span></a>
+  </div>
+
+  <p class="copy">
+    © 2026 VIP Barbershop Mustafa ·
+    <span class="no">Alle rettigheter forbeholdt</span>
+    <span class="en">All rights reserved</span>
+  </p>
+</footer>
+
+</body>
+</html>
